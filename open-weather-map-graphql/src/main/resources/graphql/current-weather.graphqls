@@ -1,0 +1,86 @@
+type Query {
+	"Current weather data"
+	weather(lat: String!, lon: String!, units: Units = standard, lang: String): WeatherData!
+}
+
+enum Units {
+	"Temperature in Kelvin"
+	standard,
+
+	"Temperature in Celsius"
+	metric,
+
+	"Temperature in Fahrenheit"
+	imperial
+}
+
+type WeatherData {
+	coord: Coordinates!
+	weather: [Weather!]!
+	base: String!
+	main: Main!
+	visibility: Float!
+	wind: Wind!
+	clouds: Clouds
+
+	"Exists where available"
+	rain: Rain
+
+	"Exists where available"
+	snow: Snow
+	dt: Int!
+	sys: Sys!
+	timezone: Int!
+	id: Int!
+	name: String!
+	cod: Int!
+}
+
+type Coordinates {
+	lon: Float!
+	lat: Float!
+}
+
+type Weather {
+	id: Int!
+	main: String!
+	description: String!
+	icon: String!
+}
+
+type Main {
+	temp: Float!
+	feelsLike: Float!
+	tempMin: Float!
+	tempMax: Float!
+	pressure: Float!
+	humidity: Float!
+	seaLevel: Float!
+	grndLevel: Float!
+}
+
+type Wind {
+	speed: Float!
+	deg: Float!
+	gust: Float!
+}
+
+type Rain {
+	oneHour: Float!
+}
+
+type Snow {
+	oneHour: Float!
+}
+
+type Clouds {
+	all: Int!
+}
+
+type Sys {
+	type: Float!
+	id: Int!
+	country: String!
+	sunrise: Int!
+	sunset: Int!
+}
